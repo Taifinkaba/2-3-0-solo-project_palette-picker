@@ -10,32 +10,56 @@
 
   <body>
     <!-- main -->
-    <main>
+    <main aria-labelledby="palettePickerTitle">
       <!-- h1 -->
       <h1>Palette Picker</h1>
       <!-- form -->
-      <form action="">
+      <form action="" id="paletteForm" aria-label="Palette Form">
         <!-- h2 -->
-        <h2></h2>
+        <h2>Add A Palette</h2>
 
         <!-- text -->
-        <input type="text">
-        <label for="text"></label>
+        <label for="paletteTitle">Palette Title:</label>
+        <input type="text" id="paletteTitle">
+        
 
         <!-- color -->
-        <input type="text" name="" id="">
-        <label for=""></label>
+        <label for="color1">Color #1</label>
+        <input type="color" name="color1" id="color1">
 
-        <input type="text" name="" id="">
-        <label for=""></label>
+        <label for="color2">Color #2</label>
+        <input type="color" name="color2" id="color2">
 
-        <input type="text" name="" id="">
-        <label for=""></label>
+        <label for="color3">Color #3</label>
+        <input type="color" name="color3" id="color3">
 
-        <!-- temperature setting -->
-        <fieldset><legend>Temperature</legend></fieldset>
+        <!-- temperature setting fieldset & legend-->
+        <fieldset>
+          <legend>Temperature</legend>
 
-        <!-- radio for temp -->
+          <!-- radio inputs & label -->
+          <label for="neutral">
+            <input type="radio" name="temperature" id="neutral" checked>Neutral
+          </label>
+
+          <label for="warm">
+            <input type="radio" name="temperature" id="warm">Warm
+          </label>
+
+          <label for="cool">
+            <input type="radio" name="temperature" id="cool">Cool
+          </label>
+        
+        </fieldset>
+
+        <!-- button -->
+        <button type="submit">Submit</button>
+
+        <!-- h2 -->
+        <h2>Palettes</h2>
+        <section id="palettes" aria-labelledby="palettesTitle">
+
+        </section>
         
       </form>
     </main>

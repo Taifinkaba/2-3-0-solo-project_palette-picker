@@ -1,33 +1,65 @@
-//Import Json file
-import { palettesJson } from './package.json';
+// JS file
+fetch('package.json')
+  .then(response => response.json())
+  .then(data => {
+    const palettesJson = data;
 
+    const palettesSection = document.getElementById('palettes');
 
-// Function to create a palette element
-const paletteElement = document.createElement('div');
+    palettesJson.forEach(palette => {
+      const paletteItem = document.createElement('li');
 
-// Create color divs
-const colorDiv = document.createElement('div');
+      palette.colors.forEach(color => {
+        const colorDiv = document.createElement('div');
+        colorDiv.style.backgroundColor = color;
+        colorDiv.style.width = '30px';
+        colorDiv.style.height = '30px';
+        colorDiv.style.marginRight = '5px';
+        colorDiv.style.border = '1px solid black';
+        colorDiv.style.position = 'relative';
 
-// Create copy buttons
-const copyButton = document.createElement('button');
+        const whiteText = document.createElement('span');
+        whiteText.textContent = 'White Text';
+        whiteText.style.color = 'white';
+        whiteText.style.position = 'absolute';
+        whiteText.style.top = '5px';
+        whiteText.style.left = '5px';
+        colorDiv.appendChild(whiteText);
 
-// Create delete button
-const deleteButton = document.createElement('button');
+        const blackText = document.createElement('span');
+        blackText.textContent = 'Black Text';
+        blackText.style.color = 'black';
+        blackText.style.position = 'absolute';
+        blackText.style.bottom = '5px';
+        blackText.style.right = '5px';
+        colorDiv.appendChild(blackText);
 
-// Create temperature banner
-const temperatureBanner = document.createElement('div');
+        paletteItem.appendChild(colorDiv);
+      });
 
-// Append palette to palettes section
-const palettesSection = document.getElementById('palettes');
+      paletteItem.textContent = palette.name;
 
-// Get form inputs
-const title = document.getElementById('paletteTitle').value;
-const color1 = document.getElementById('color1').value;
-const color2 = document.getElementById('color2').value;
-const color3 = document.getElementById('color3').value;
-const temperature = document.querySelector('input[name="temperature"]:checked').id;
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.style.position = 'absolute';
+      deleteButton.style.bottom = '5px';
+      deleteButton.style.left = '5px';
+      paletteItem.appendChild(deleteButton);
 
+      const temperatureBanner = document.createElement('div');
+      temperatureBanner.textContent = palette.temperature;
+      temperatureBanner.style.backgroundColor = palette.temperatureColor;
+      temperatureBanner.style.position = 'absolute';
+      temperatureBanner.style.bottom = '0';
+      temperatureBanner.style.left = '0';
+      temperatureBanner.style.width = '100%';
+      temperatureBanner.style.textAlign = 'center';
+      paletteItem.appendChild(temperatureBanner);
 
+      palettesSection.appendChild(paletteItem);
+    });
 
-// Create palette
-const colors = [color1, color2, color3];
+    palettesSection.style.display = 'grid';
+    palettesSection.style.gridTemplateColumns = 'repeat(auto-fit, minmax(200px, 1fr))';
+    palettesSection.style.gap = '20px';
+  });
